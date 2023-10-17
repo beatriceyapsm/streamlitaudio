@@ -13,6 +13,10 @@ st.set_page_config(page_title="My webpage", page_icon=":tada:",
 
 st.title("Singaporean English Speech to Text")
 
+tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
+model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
+model1 = Wav2Vec2ForCTC.from_pretrained('beatrice-yap/wav2vec2-base-nsc-demo-3')
+
 left_column, right_column = st.columns(2)
 
 with right_column:
@@ -27,9 +31,6 @@ with left_column:
     st.subheader("Record an audio:")
     audio_path = "audio.wav"  # Define the path to save the audio file in the current working directory
     audio_recording = st_audiorec() #"Click to record", "Click to stop recording")
-    tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
-    model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
-    model1 = Wav2Vec2ForCTC.from_pretrained('beatrice-yap/wav2vec2-base-nsc-demo-3')
 
     if audio_recording is not None:
         # st.audio(audio_recording, format='audio/wav') 
