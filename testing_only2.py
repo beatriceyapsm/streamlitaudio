@@ -5,6 +5,7 @@ from audio_to_text import audio_to_text, audio_to_text_our_model
 from st_audiorec import st_audiorec
 from scipy.io import wavfile
 import io
+from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor, Wav2Vec2Tokenizer
 
 st.set_page_config(page_title="My webpage", page_icon=":tada:",
                    layout="wide")
@@ -26,6 +27,10 @@ with left_column:
     st.subheader("Record an audio:")
     audio_path = "audio.wav"  # Define the path to save the audio file in the current working directory
     audio_recording = st_audiorec() #"Click to record", "Click to stop recording")
+    tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
+    model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
+    model1 = Wav2Vec2ForCTC.from_pretrained('beatrice-yap/wav2vec2-base-nsc-demo-3')
+
     if audio_recording is not None:
         # st.audio(audio_recording, format='audio/wav') 
         # st.audio(audio_recording, format='audio/wav')
@@ -39,7 +44,7 @@ with left_column:
             # audio_recording.export(audio_path, format="wav")  # Save the recorded audio
             # audio_data, sample_rate = librosa.load(audio_recording, sr=None) #audio_path
             # audio_data, sample_rate = librosa.core.load(io.BytesIO(audio_recording), sr=16000)
-            text = audio_to_text(audio_recording)
+            text = audio_to_text(audio_recording, tokenizer, model)
             st.subheader("Baseline Transcription:")
             st.write(text)
         except Exception as e:
@@ -47,7 +52,7 @@ with left_column:
 
         try:
             #audio_data, sample_rate = librosa.load(audio_path, sr=None)
-            text = audio_to_text_our_model(audio_recording)
+            text = audio_to_text_our_model(audio_recording, tokenizer, model1)
             st.subheader("Transcription:")
             st.write(text)
         except Exception as e:

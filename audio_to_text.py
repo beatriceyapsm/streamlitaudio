@@ -9,7 +9,7 @@ from IPython.display import Audio
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor, Wav2Vec2Tokenizer
 
 
-def audio_to_text(audio_recording):
+def audio_to_text(audio_recording, tokenizer, model):
     """
     Transcribes an audio file into text using the Wav2Vec2 model.
 
@@ -20,8 +20,6 @@ def audio_to_text(audio_recording):
         str: The transcribed text from the audio file.
 
     """
-    tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
-    model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
 
     # Read the audio file "audio.wav"
     # audio_path = "audio.wav"
@@ -42,18 +40,13 @@ def audio_to_text(audio_recording):
     return text
 
 
-def audio_to_text_our_model(audio_recording):
+def audio_to_text_our_model(audio_recording, tokenizer, model):
     """
     Transcribes an audio file into text using our finetuned Wav2Vec2 model.
 
     Returns:
     str: The transcribed text from the audio file.
     """
-
-    tokenizer = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
-    model = Wav2Vec2ForCTC.from_pretrained('beatrice-yap/wav2vec2-base-nsc-demo-3')
-
-
     # Read the audio file "audio.wav"
     # audio_path = "audio.wav"
     waveform, sample_rate = librosa.core.load(io.BytesIO(audio_recording), sr=16000) #soundfile.read(audio_path)
