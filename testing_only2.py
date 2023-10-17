@@ -13,9 +13,9 @@ st.set_page_config(page_title="My webpage", page_icon=":tada:",
 
 st.title("Singaporean English Speech to Text")
 
-@st.cache(hash_funcs={"MyUnhashableClass": lambda _: None})
+# @st.cache(hash_funcs={"MyUnhashableClass": lambda _: None})
           
-@st.cache
+@st.cache_resource
 def load_model():
     tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
     model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
