@@ -17,12 +17,12 @@ with left_column:
     st.subheader("Record an audio:")
     audio_path = "audio.wav"  # Define the path to save the audio file in the current working directory
     audio_recording = st_audiorec() #"Click to record", "Click to stop recording")
-    # if audio_recording is not None:
-    #     st.audio(audio_recording, format='audio/wav') 
+    if audio_recording is not None:
+        st.audio(audio_recording, format='audio/wav') 
 
-    if len(audio_recording) > 0:
-        st.audio(audio_recording.export().read())
-        st.write(f"Frame rate: {audio_recording.frame_rate}, Frame width: {audio_recording.frame_width}, Duration: {audio_recording.duration_seconds} seconds") 
+    # if len(audio_recording) > 0:
+    #     st.audio(audio_recording.export().read())
+    #     st.write(f"Frame rate: {audio_recording.frame_rate}, Frame width: {audio_recording.frame_width}, Duration: {audio_recording.duration_seconds} seconds") 
 
         try:
             # Open and process the audio file
