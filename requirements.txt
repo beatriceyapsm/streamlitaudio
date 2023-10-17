@@ -4,3 +4,7 @@ streamlit
 soundfile
 scipy
 streamlit-audiorec
+torch
+transformers
+wavfile
+ipython
