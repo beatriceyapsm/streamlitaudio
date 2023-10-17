@@ -9,7 +9,7 @@ from IPython.display import Audio
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor, Wav2Vec2Tokenizer
 
 
-def audio_to_text():
+def audio_to_text(audio_recording):
     """
     Transcribes an audio file into text using the Wav2Vec2 model.
 
@@ -24,8 +24,8 @@ def audio_to_text():
     model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
 
     # Read the audio file "audio.wav"
-    audio_path = "audio.wav"
-    audio_data, sample_rate = soundfile.read(audio_path)
+    # audio_path = "audio.wav"
+    audio_data, sample_rate = librosa.core.load(io.BytesIO(audio_recording), sr=16000) #soundfile.read(audio_path)
 
     # Resample audio file 
     target_sample_rate = 16000
@@ -42,7 +42,7 @@ def audio_to_text():
     return text
 
 
-def audio_to_text_our_model():
+def audio_to_text_our_model(audio_recording):
     """
     Transcribes an audio file into text using our finetuned Wav2Vec2 model.
 
@@ -55,8 +55,8 @@ def audio_to_text_our_model():
 
 
     # Read the audio file "audio.wav"
-    audio_path = "audio.wav"
-    waveform, sample_rate = soundfile.read(audio_path)
+    # audio_path = "audio.wav"
+    waveform, sample_rate = librosa.core.load(io.BytesIO(audio_recording), sr=16000) #soundfile.read(audio_path)
 
     target_sample_rate = 16000
     audio_data_resampled = librosa.resample(y=waveform, orig_sr=sample_rate, target_sr=target_sample_rate)

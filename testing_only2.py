@@ -38,8 +38,8 @@ with left_column:
             # Open and process the audio file
             # audio_recording.export(audio_path, format="wav")  # Save the recorded audio
             # audio_data, sample_rate = librosa.load(audio_recording, sr=None) #audio_path
-            audio_data, sample_rate = librosa.core.load(io.BytesIO(audio_recording), sr=16000)
-            text = audio_to_text()
+            # audio_data, sample_rate = librosa.core.load(io.BytesIO(audio_recording), sr=16000)
+            text = audio_to_text(audio_recording)
             st.subheader("Baseline Transcription:")
             st.write(text)
         except Exception as e:
@@ -47,7 +47,7 @@ with left_column:
 
         try:
             #audio_data, sample_rate = librosa.load(audio_path, sr=None)
-            text = audio_to_text_our_model()
+            text = audio_to_text_our_model(audio_recording)
             st.subheader("Transcription:")
             st.write(text)
         except Exception as e:
