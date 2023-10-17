@@ -13,9 +13,15 @@ st.set_page_config(page_title="My webpage", page_icon=":tada:",
 
 st.title("Singaporean English Speech to Text")
 
-tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
-model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
-model1 = Wav2Vec2ForCTC.from_pretrained('beatrice-yap/wav2vec2-base-nsc-demo-3')
+@st.cache
+def load_model():
+    tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
+    model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
+    model1 = Wav2Vec2ForCTC.from_pretrained('beatrice-yap/wav2vec2-base-nsc-demo-3')
+
+    return tokenizer, model, model1
+
+tokenizer, model, model1 = load_model() 
 
 left_column, right_column = st.columns(2)
 
