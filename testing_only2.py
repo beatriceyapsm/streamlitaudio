@@ -16,7 +16,9 @@ left_column, right_column = st.columns(2)
 with left_column:
     st.subheader("Record an audio:")
     audio_path = "audio.wav"  # Define the path to save the audio file in the current working directory
-    audio_recording = st_audiorec("Click to record", "Click to stop recording")
+    audio_recording = st_audiorec() #"Click to record", "Click to stop recording")
+    # if audio_recording is not None:
+    #     st.audio(audio_recording, format='audio/wav') 
 
     if len(audio_recording) > 0:
         st.audio(audio_recording.export().read())
