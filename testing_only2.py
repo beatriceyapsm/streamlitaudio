@@ -18,7 +18,7 @@ with left_column:
     audio_path = "audio.wav"  # Define the path to save the audio file in the current working directory
     audio_recording = st_audiorec() #"Click to record", "Click to stop recording")
     if audio_recording is not None:
-        st.audio(audio_recording, format='audio/wav') 
+        # st.audio(audio_recording, format='audio/wav') 
 
     # if len(audio_recording) > 0:
     #     st.audio(audio_recording.export().read())
@@ -26,8 +26,8 @@ with left_column:
 
         try:
             # Open and process the audio file
-            audio_recording.export(audio_path, format="wav")  # Save the recorded audio
-            audio_data, sample_rate = librosa.load(audio_path, sr=None)
+            # audio_recording.export(audio_path, format="wav")  # Save the recorded audio
+            audio_data, sample_rate = librosa.load(audio_recording, sr=None) #audio_path
             text = audio_to_text()
             st.subheader("Baseline Transcription:")
             st.write(text)
