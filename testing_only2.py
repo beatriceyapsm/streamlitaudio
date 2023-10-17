@@ -2,7 +2,7 @@ import librosa
 import soundfile
 import streamlit as st
 from audio_to_text import audio_to_text, audio_to_text_our_model
-from audiorecorder import audiorecorder
+from st_audiorec import st_audiorec
 from scipy.io import wavfile
 
 st.set_page_config(page_title="My webpage", page_icon=":tada:",
@@ -16,7 +16,7 @@ left_column, right_column = st.columns(2)
 with left_column:
     st.subheader("Record an audio:")
     audio_path = "audio.wav"  # Define the path to save the audio file in the current working directory
-    audio_recording = audiorecorder("Click to record", "Click to stop recording")
+    audio_recording = st_audiorec("Click to record", "Click to stop recording")
 
     if len(audio_recording) > 0:
         st.audio(audio_recording.export().read())

@@ -1,9 +1,7 @@
-  python
-  pip
-  librosa
-  numpy
-  streamlit
-  soundfile
-  pip:
-    - scipy
-    - streamlit-audiorecorder
+python
+librosa
+numpy
+streamlit
+soundfile
+scipy
+streamlit-audiorec
